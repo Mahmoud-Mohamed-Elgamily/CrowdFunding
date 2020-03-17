@@ -44,8 +44,7 @@ class Images (models.Model):
     # img_id = models.AutoField(primary_key = True,null=False)
     img = models.ImageField(upload_to="images/")
 
-# hena f class img
-# da mlosh lzam by default django bt3ml id
+
 
 
 #projects model
@@ -62,7 +61,7 @@ class Projects (models.Model):
     tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
     project_img = models.ForeignKey(Images, on_delete=models.CASCADE , null=False)
 
-# el moshklda hna ?
+
 
 
 
