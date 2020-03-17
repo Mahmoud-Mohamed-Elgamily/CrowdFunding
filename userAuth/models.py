@@ -2,6 +2,14 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 
+class UserPhone (models.Model):
+    phone_regex = RegexValidator(regex=r'^[+-]?[0-9]+$')
+    user_phone = models.CharField(validators=[phone_regex], max_length=11)
+
+    def __str__(self):
+        return self.user_id__user_fname
+
+
 class User (models.Model):
     user_fname = models.CharField(max_length=10)
     user_lname = models.CharField(max_length=10)
@@ -11,10 +19,3 @@ class User (models.Model):
 
     def __str__(self):
         return self.user_fname
-
-class UserPhone (models.Model):
-    phone_regex = RegexValidator(regex=r'^[+-]?[0-9]+$')
-    user_phone = models.CharField(validators=[phone_regex], max_length=11)
-
-    def __str__(self):
-        return self.user_id__user_fname

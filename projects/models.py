@@ -1,5 +1,18 @@
 from django.db import models
-from auth.models import User 
+from userAuth.models import User
+
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=20)
+
+
+class Images (models.Model):
+    img = models.ImageField(upload_to="images/")
+
+
+class Tag (models.Model):
+    tag_name = models.CharField(max_length=10)
+
 
 class Projects (models.Model):
     project_title = models.CharField(max_length=40)
@@ -10,15 +23,8 @@ class Projects (models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
-    project_img = models.ForeignKey(Images, on_delete=models.CASCADE, null=False)
-
-
-class Images (models.Model):
-    img = models.ImageField(upload_to="images/")
-
-
-class Category(models.Model):
-    category_name = models.CharField(max_length=20)
+    project_img = models.ForeignKey(
+        Images, on_delete=models.CASCADE, null=False)
 
 
 class Comment (models.Model):
@@ -31,8 +37,3 @@ class Donation (models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     donation_amount = models.IntegerField()
-
-
-class Tag (models.Model):
-
-    tag_name = models.CharField(max_length=10)
