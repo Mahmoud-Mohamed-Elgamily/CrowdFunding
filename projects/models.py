@@ -10,8 +10,7 @@ class Projects (models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
-    project_img = models.ForeignKey(
-        Images, on_delete=models.CASCADE, null=False)
+    project_img = models.ForeignKey(Images, on_delete=models.CASCADE, null=False)
 
 
 class Images (models.Model):
