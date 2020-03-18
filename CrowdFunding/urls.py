@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("HomePage.urls", namespace="crowdFund")),
     path('projects/', include(ProjectUrls)),
+    path('user/', include("user.urls")),
 ]
