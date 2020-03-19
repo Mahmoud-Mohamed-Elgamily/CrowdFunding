@@ -1,5 +1,5 @@
 from django.db import models
-from userAuth.models import User
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):

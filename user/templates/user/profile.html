@@ -1,9 +1,5 @@
 {% extends 'user/base.html'%}
-{%block title%}
-profile
-{%endblock%}
+{%block title%}profile{%endblock%}
 
-{% block content%}
-user profile..
-{%endblock%}
+{% block body%}<h1>{{ user.user_fname }}</h1>{%endblock%}
 
