@@ -6,8 +6,7 @@ class UserPhone (models.Model):
     phone_regex = RegexValidator(regex=r'^[+-]?[0-9]+$')
     user_phone = models.CharField(validators=[phone_regex], max_length=11)
 
-    def __str__(self):
-        return self.user_id__user_fname
+
 
 
 class User (models.Model):
@@ -17,5 +16,3 @@ class User (models.Model):
     user_password = models.CharField(max_length=50)
     phone_id = models.ForeignKey(UserPhone, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user_fname

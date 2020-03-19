@@ -1,5 +1,8 @@
 from django.db import models
 from userAuth.models import User
+from CrowdFunding import settings
+from django.core.validators import *
+
 
 
 class Category(models.Model):
@@ -7,7 +10,7 @@ class Category(models.Model):
 
 
 class Images (models.Model):
-    img = models.ImageField(upload_to="images/")
+    img = models.ImageField(upload_to="HomePage/static/image/")
 
 
 class Tag (models.Model):
@@ -20,7 +23,7 @@ class Projects (models.Model):
     total_donation = models.IntegerField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    c = models.ForeignKey(Category, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
     project_img = models.ForeignKey(
@@ -37,3 +40,19 @@ class Donation (models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     donation_amount = models.IntegerField()
+
+
+
+class Rate (models.Model):
+    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate_content=models.TextField(default=' ')
+    rate_number = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
+
+
+class FeaturedProject (models.Model):
+    proj = models.ForeignKey(Projects, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.proj.title)
+
