@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-@login_required()
+# @login_required()
 def show_profile(request):
     # return HttpResponse("Welcome.. user profile")
     user = User.objects.filter(username='mariam')

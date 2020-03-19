@@ -1,6 +1,8 @@
 from django.contrib import admin
 from projects.models import *
-from userAuth.models import *
+from user.models import *
+from django.contrib.auth.models import User
+
 # Register your models here.
 
 admin.site.register(Projects)
