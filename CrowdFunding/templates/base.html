@@ -21,17 +21,23 @@
             <a href="#!" class="brand-logo">Logo</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/profile">Profile</a></li>
+                <li {% if activate == 'home' %}class="active" {% endif %}>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li {% if activate == 'projects' %}class="active" {% endif %}>
+                    <a href="{% url 'projects' %}">Projects</a>
+                </li>
+                <li {% if activate == 'profile' %}class="active" {% endif %}>
+                    <a href="{% url 'profile' %}">Profile</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/profile">Profile</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'projects' %}">Projects</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
     </ul>
     <!-- END NAV BAR -->
 
@@ -44,9 +50,7 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/materialize.min.js'%}"></script>
     <script>
-        $(document).ready(function () {
-            $('.sidenav').sidenav();
-        });
+        M.AutoInit();
     </script>
 </body>
 
