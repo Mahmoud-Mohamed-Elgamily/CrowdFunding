@@ -2,15 +2,17 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile,UserPhone
+from projects.models import Projects
 
 # Create your views here.
 
 
-# @login_required()
+@login_required()
 def show_profile(request):
-    # return HttpResponse("Welcome.. user profile")
-    user = User.objects.filter(username='mariam')
-    return render(request, 'user/profile.html', {'user': user})
+    # profile = Profile.user
+    # phone = profile.phone_set.all()
+    return render(request, 'user/profile.html')
 
 
 def edit_profile(request):
@@ -19,6 +21,7 @@ def edit_profile(request):
 
 
 def my_projects(request):
+    my_project = Projects.object.filter(user_id=User.id)
     return render(request, 'user/my_projects.html')
 
 

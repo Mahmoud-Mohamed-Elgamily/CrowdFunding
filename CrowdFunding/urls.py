@@ -8,9 +8,9 @@ urlpatterns = [
     path('', include("HomePage.urls", namespace="crowdFund")),
     path('projects/', include(ProjectUrls)),
     path('profile/', include("user.urls"))
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
