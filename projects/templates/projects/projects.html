@@ -9,7 +9,7 @@
         <div class="col s12 m6">
             <div class="card">
                 <div class="card-image">
-                    <img src="{{ project.project_img.img.url}}">
+                    <img src="{{ project.images_set.all.0.img.url}}">
                     <span class="card-title">{{ project.project_title }}</span>
                     <a 
                     href="{{project.id}}"
@@ -19,13 +19,15 @@
                 </div>
                 <div class="card-content">
                     <p>
-                        {{ project.project_details }}
+                        {{ project.project_details | truncatewords:20 }}
                     </p>
                 </div>
-                {% if tags %}
-                    <div class="card-action">
-                        {% for t in tags %}
-                            <a href="{{t.tag_id}}">{{ t.tag_id__tag_name }}</a>
+                {% comment %} {% for book in author.book_set.all %} {% endcomment %}
+
+                {% if project.tag_set.all %}
+                    <div class="card-action black">
+                        {% for t in project.tag_set.all %}
+                            <a href="tag/{{t.id}}">{{ t.tag_name }}</a>
                         {% endfor %}
                     </div>
                 {% endif %}
