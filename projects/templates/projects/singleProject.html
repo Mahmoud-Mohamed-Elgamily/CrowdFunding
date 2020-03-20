@@ -1,35 +1,59 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %} All Projects {% endblock %}
 
 {% block body %}
-
-<link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
-<nav id="breadcrumbs">
-    <div class="nav-wrapper white">
-        <div class="col s12">
-            <a href="{% url 'home' %}" class="breadcrumb">Home</a>
-            <a href="{% url 'projects' %}" class="breadcrumb">Projects</a>
-            <a href="#" class="breadcrumb">#{{project.project_title}}</a>
+    {% comment %} <h1> hello from body </h1> {% endcomment %}
+   
+    
+    <div class="col s12 m6">
+        <h1> {{ project.project_title }} </h1>
+        <span class="card-title"></span>
+        <div class="card">
+            <div>
+                <p style = "font-size:20px">
+                    The Project Description is:</p><p> {{ project.project_details | truncatewords:20 }}
+                 </p>
+            </div>
+            <div class="card-image">
+                <img src="{{ project.images_set.all.0.img.url}}">
+                
+              
+            </div>
+            <div >
+                
+                <p>
+                <h5>All Comments :</h5>
+                 </p>
+               
+                    <!-- comments -->
+                 
+              
+                    {% for Comment in comments %}
+                    <div >
+                      {{ Comment.comment_content  }}
+                    <span><a href="/projects/report/">Report </a></span> 
+                    </div></br>
+              
+                    {% endfor %}
+                  </div>
+                </div>
+                <div >
+                  
+                    <h3>Leave a comment</h3>
+                    <form method="POST" >
+                        {{ comment_form.as_p }}
+                      {% csrf_token %}
+                      
+                      
+                      <button type="submit" value="Sumbit">Send</button>
+                      <a href="/projects/report/">REPORT THE PROJECT</a>
+                    </form>
+              
+                  </div>
+           
+            </div>
+            
         </div>
     </div>
-</nav>
-
-<div class="row">
-    <div class=" col s12 m9">
-        <div class="carousel">
-            {% for image in project.images_set.all %}
-                <a class="carousel-item"><img src="{{image.img.url}}"></a>
-            {% endfor %}
-        </div>
-    </div>
-    <div class=" col s12 m3">
-        <h5>similar projects</h5>
-        {% for project in similar %}
-            <a href="{{project.id}}">{{ project }}</a>
-        {% endfor %}
-    </div>
-</div>
-
 {% endblock %}

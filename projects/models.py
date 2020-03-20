@@ -38,7 +38,7 @@ class Images (models.Model):
     project = models.ForeignKey(Projects, on_delete=models.CASCADE, null=False)
 
 class Comment (models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
     comment_content = models.TextField(default=' ')
 
@@ -68,3 +68,9 @@ class FeaturedProject (models.Model):
 
     def __str__(self):
         return str(self.proj.title)
+
+
+class Report (models.Model):
+  
+    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    report_content = models.TextField(default=' ')
