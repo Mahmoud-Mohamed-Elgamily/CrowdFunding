@@ -6,7 +6,3 @@ urlpatterns = [
     path('', views.last_five_project, name="home"),
     path('category/<int:id>', views.category_details, name="ProjectCategory"),
 ]
-
-# urlpatterns = [
-#     path('', views.all_projects, name="home"),
-# ]

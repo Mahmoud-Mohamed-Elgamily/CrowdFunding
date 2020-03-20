@@ -1,6 +1,5 @@
 from django.db import models
-from userAuth.models import User
-from CrowdFunding import settings
+from django.contrib.auth.models import User
 from django.core.validators import *
 
 
@@ -10,10 +9,7 @@ class Projects (models.Model):
     total_donation = models.IntegerField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    # category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    # tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='tag')
-    # project_img = models.ForeignKey(Images, on_delete=models.CASCADE, null=False)
 
     def __str__(self):
         return self.project_title

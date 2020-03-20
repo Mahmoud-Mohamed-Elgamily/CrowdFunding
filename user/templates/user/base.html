@@ -1,37 +1,53 @@
-<!DOCTYPE html>
+{% load static %}
+<!--<!DOCTYPE html>-->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>{%block title%}{%endblock%}</title>
+    <title>{% block title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mainStyle.css' %}">
+
 </head>
+
 <body>
-<header>
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-danger bg-light">
-        <div class="container">
-            <h2 class="text-info">User Profile |</h2>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Projects</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <div class="my-2 my-sm-0">
-                        <img src="../public/Images/userAvatar.png" width="50" height="50" alt="userAvatar" />
-                        <span class="h4">User Name</span>
-                    </div>
-                </form>
-            </div>
+    <!-- NAV BAR -->
+    <nav>
+        <div class="container nav-wrapper" style="width: 80%;">
+            <a href="#!" class="brand-logo">User Profile</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/profile/my_projects">My Projects</a></li>
+                <li><a href="/profile/edit">Edit Profile</a></li>
+            </ul>
         </div>
     </nav>
-</header>
-</header>
-{% block content%} Default Content {%endblock%}
 
-<footer>footer</footer>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/projects">My Projects</a></li>
+        <li><a href="/profile">Edit Profile</a></li>
+    </ul>
+    <!-- END NAV BAR -->
+
+    <div class="container">
+        {% block body %}
+        <h1>hello</h1>
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js'%}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+    </script>
 </body>
+
 </html>
