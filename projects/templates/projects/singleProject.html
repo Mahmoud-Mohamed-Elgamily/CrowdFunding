@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %} All Projects {% endblock %}
 
@@ -23,13 +22,13 @@
         <h5>similar projects</h5>
         <ul class="collection">
             {% for project in similar %}
-                <li class="collection-item avatar">
-                    <img src="{{project.images_set.all.0.img.url}}" alt="" class="circle">
-                    <span class="title">{{ project }}</span>
-                    <a href="{{project.id}}" class="secondary-content">
+            <li class="collection-item avatar">
+                <img src="{{project.images_set.all.0.img.url}}" alt="" class="circle">
+                <span class="title">{{ project }}</span>
+                <a href="{{project.id}}" class="secondary-content">
                     <i class="material-icons">send</i>
-                    </a>
-                </li>
+                </a>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -97,4 +96,63 @@
 </div>
 
 <script src="{% static 'projects/js/scripts.js' %}"></script>
+
+
+
+
+
+
+{% comment %} haidy code starts here {% endcomment %}
+<div class="col s12 m6">
+    <h1> {{ project.project_title }} </h1>
+    <span class="card-title"></span>
+    <div class="card">
+        <div>
+            <p style="font-size:20px">
+                The Project Description is:</p>
+            <p> {{ project.project_details | truncatewords:20 }}
+            </p>
+        </div>
+        <div class="card-image">
+            <img src="{{ project.images_set.all.0.img.url}}">
+
+
+        </div>
+        <div>
+
+            <p>
+                <h5>All Comments :</h5>
+            </p>
+
+            <!-- comments -->
+
+
+            {% for Comment in comments %}
+            <div>
+                {{ Comment.comment_content  }}
+                <span><a href="/projects/report/">Report </a></span>
+            </div></br>
+
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+
+        <h3>Leave a comment</h3>
+        <form method="POST">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+
+
+            <button type="submit" value="Sumbit">Send</button>
+            <a href="/projects/report/">REPORT THE PROJECT</a>
+        </form>
+
+    </div>
+
+</div>
+
+</div>
+</div>
+{% comment %} haidy code ends here {% endcomment %}
 {% endblock %}
