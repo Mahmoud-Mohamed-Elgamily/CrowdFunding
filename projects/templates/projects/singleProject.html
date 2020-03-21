@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} All Projects {% endblock %}
 
 {% block body %}
-    {% comment %} <h1> hello from body </h1> {% endcomment %}
-    <h1> hello </h1>
-    {{project}}
+
+<link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
+<nav id="breadcrumbs">
+    <div class="nav-wrapper white">
+        <div class="col s12">
+            <a href="{% url 'home' %}" class="breadcrumb">Home</a>
+            <a href="{% url 'projects' %}" class="breadcrumb">Projects</a>
+            <a href="#" class="breadcrumb">#{{project.project_title}}</a>
+        </div>
+    </div>
+</nav>
+
+<div class="row">
+    <div class=" col s12 m9">
+        <div class="carousel">
+            {% for image in project.images_set.all %}
+                <a class="carousel-item"><img src="{{image.img.url}}"></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class=" col s12 m3">
+        <h5>similar projects</h5>
+        {% for project in similar %}
+            <a href="{{project.id}}">{{ project }}</a>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

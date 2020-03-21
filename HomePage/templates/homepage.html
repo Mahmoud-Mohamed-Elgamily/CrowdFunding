@@ -146,7 +146,7 @@
 			{% for last in last_project %}
 			<div class="col-sm-4">
 				<div class="card" style="width: 18rem;">
-					<img src="{{last.project_img.img.url}}" class="card-img-top" alt="...">
+					<img src="{{last.images_set.all.0.img.url}}" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title">{{last.project_title}}</h5>
 						<p class="card-text">{{last.project_details|truncatewords:10}}</p>

@@ -3,6 +3,20 @@ from django.contrib.auth.models import User
 from django.core.validators import *
 
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=20)
+    def __str__(self):
+        return self.category_name
+
+
+class Tag (models.Model):
+    tag_name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.tag_name
+
+
+
 class Projects (models.Model):
     project_title = models.CharField(max_length=40)
     project_details = models.TextField(default=' ')
@@ -10,30 +24,18 @@ class Projects (models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(Tag , related_name='tags')
+    category = models.ManyToManyField(Category , related_name='categories')
+
 
     def __str__(self):
         return self.project_title
 
 
-class Category(models.Model):
-    category_name = models.CharField(max_length=20)
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.category_name
-
 
 class Images (models.Model):
     img = models.ImageField(upload_to="HomePage/static/image/")
     project = models.ForeignKey(Projects, on_delete=models.CASCADE, null=False)
-
-
-class Tag (models.Model):
-    tag_name = models.CharField(max_length=10)
-    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.tag_name
-
 
 class Comment (models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
