@@ -1,5 +1,55 @@
 {% extends 'user/base.html'%}
 {%block title%}profile{%endblock%}
+{% load static%}
+{% block body%}
+<div class="container">
+    <div class="section">
+       <div class="card-panel grey lighten-5 z-depth-1">
+           <div class="row valign-wrapper">
+               <div class="col s2">
+                   <img class="circle responsive-img" style="width:100px;height:100px" src="{{ user.profile.user_picture.url }}">
+               </div>
+               <div class="col s10">
+                   <h3 class="account-heading">{{ user.username }}</h3>
+                   <p class="text-secondary">{{ user.email }}</p>
+               </div>
+           </div>
+        </div>
+    </div>
+    <!-- user Data HERE -->
+    <table>
+            <th>First Name</th>
+            <td>{{user.first_name}}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{user.last_name}}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <th>Phone Numbers</th>
+            <td>{{phone.phone}}</td>
+        </tr>
+        <tr>
+            <th>Birth Date</th>
+            <td>{{user.profile.birth_date}}</td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>{{user.profile.country}}</td>
+        </tr>
+        <tr>
+            <th>Facebook profile</th>
+            <td>{{user.profile.facebook_url}}</td>
+        </tr>
 
-{% block body%}<h1>{{ user.user_fname }}</h1>{%endblock%}
+    </table>
+
+</div>
+
+
+{%endblock%}
 
