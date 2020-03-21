@@ -4,8 +4,10 @@
 {% block title %} All Projects {% endblock %}
 
 {% block body %}
-
+<script src="https://js.stripe.com/v3/"></script>
 <link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
+
+
 <nav id="breadcrumbs">
     <div class="nav-wrapper white">
         <div class="col s12">
@@ -17,19 +19,82 @@
 </nav>
 
 <div class="row">
-    <div class=" col s12 m9">
+    <div class=" col s12 m3 push-m9 ">
+        <h5>similar projects</h5>
+        <ul class="collection">
+            {% for project in similar %}
+                <li class="collection-item avatar">
+                    <img src="{{project.images_set.all.0.img.url}}" alt="" class="circle">
+                    <span class="title">{{ project }}</span>
+                    <a href="{{project.id}}" class="secondary-content">
+                    <i class="material-icons">send</i>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class=" col s12 m9 pull-m3 ">
         <div class="carousel">
             {% for image in project.images_set.all %}
-                <a class="carousel-item"><img src="{{image.img.url}}"></a>
+            <div class="carousel-item white-text">
+                {% comment %} <h2>First Panel</h2> {% endcomment %}
+                <img src="{{image.img.url}}">
+            </div>
             {% endfor %}
         </div>
-    </div>
-    <div class=" col s12 m3">
-        <h5>similar projects</h5>
-        {% for project in similar %}
-            <a href="{{project.id}}">{{ project }}</a>
-        {% endfor %}
+
+        <section id="about">
+            <h4> About The Project</h4>
+            <div class="divider"></div>
+            <blockquote>
+                {{project.project_details}}
+            </blockquote>
+        </section>
+
+        <section id="donation">
+            <h4> Donations Our target is {{project.total_donation}}</h4>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col s12 m10">
+                    <div class="progress">
+                        <div style="width: 70%" class="determinate tooltipped" data-position="top"
+                            data-tooltip="tooltip">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m2">
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Donate!</a>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <form action="charge" method="post" id="payment-form">
+                                {% csrf_token %}
+                                <input type="number" name="project_id" value="{{project.id}}" hidden>
+                                <div class="form-row">
+                                    <label for="card-element">
+                                        Credit or debit card
+                                    </label>
+                                    <div id="card-element">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+
+                                <button>Submit Payment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comments">
+            <!-- add comments in here -->
+        </section>
     </div>
 </div>
 
+<script src="{% static 'projects/js/scripts.js' %}"></script>
 {% endblock %}
