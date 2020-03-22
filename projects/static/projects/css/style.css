@@ -79,4 +79,13 @@ section {
     background-color: #fefde5 !important;
 }
 
+h5.accent-1{
+    margin: 0;
+    margin-top: 9px;
+}
+.accent-1{
+    padding: 5px;
+    border-radius: 2px;
+}
+
 /*end stripe css*/
